@@ -4,9 +4,6 @@
     align-items: center;
     flex-direction: column;
 }
-.comtainer_modal:active {
-    top: 500px;
-}
 
 .btn_modal {
     position: relative;
@@ -19,7 +16,7 @@
     border-radius: 15px;
     border: 1px solid black;
     cursor: pointer;
-    transform: 3s ease;
+    transition: 3s ease;
 
 }
 

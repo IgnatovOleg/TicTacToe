@@ -10,7 +10,7 @@ interface TypeProps {
     TicTacToe: TypeTicTacToe[],
     crossOrCircle: boolean,
     setCrossOrCircle: (crossOrCircle: boolean) => void,
-    visibleIcon: (t: TypeTicTacToe, crossOrCircle: boolean) => void
+    visibleIcon: (t: TypeTicTacToe, crossOrCircle: boolean) => void,
 }
 
 

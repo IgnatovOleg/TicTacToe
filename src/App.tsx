@@ -11,7 +11,6 @@ function App() {
 
   const [crossOrCircle, setCrossOrCircle] = useState<boolean>(true)
   const [visibleModal, setVisibleModal] = useState<boolean>(true)
-  console.log(visibleModal);
   
   const {TicTacToe} = useTypedSelector(state => state.ticTacToe)
   
@@ -25,20 +24,17 @@ function App() {
     }
     return t
   }
+  
 
   return (
     <div className="App">
-      {visibleModal
-        ?
-          <div className='modal'>
+          <div className={visibleModal ? "modal" : "modalDown"}>
             <Modal visibleModal={visibleModal} setVisibleModal={setVisibleModal}/>
           </div>
-        : 
           <div>
             <Top crossOrCircle={crossOrCircle} setCrossOrCircle={setCrossOrCircle}/>
             <CrossAndCircleSpace crossOrCircle={crossOrCircle} setCrossOrCircle={setCrossOrCircle} TicTacToe={TicTacToe} visibleIcon={visibleIcon}/>
           </div>
-      }
     </div>
   );
 }
