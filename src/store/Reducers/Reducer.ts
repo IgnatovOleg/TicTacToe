@@ -13,19 +13,15 @@ export type TypeTicTacToe = {
 
 enum TicTacToeActionsTypes {
     REMOVE_ICON = "REMOVE_ICON",
-    REMOVE_VISIBLE = "REMOVE_VISIBLE",
 }
 
 interface RemoveIcon {
     type: TicTacToeActionsTypes.REMOVE_ICON,
     payload: {t: TypeTicTacToe, crossOrCircle: boolean},
 }
-interface RemoveVisible {
-    type: TicTacToeActionsTypes.REMOVE_VISIBLE,
-    payload: TypeTicTacToe
-}
 
-type TicTacToeActions = RemoveVisible | RemoveIcon
+
+type TicTacToeActions = RemoveIcon
 
 
 const defaultState: TicTacToeInterface = {
@@ -48,12 +44,7 @@ export const Reducer = (state = defaultState, action: TicTacToeActions): TicTacT
         case TicTacToeActionsTypes.REMOVE_ICON:
             return{
                 ...state,
-                TicTacToe: state.TicTacToe.map(ttt => (ttt.id === action.payload.t.id ? {...ttt, icon: ttt.icon = action.payload.crossOrCircle} : ttt))
-            }
-        case TicTacToeActionsTypes.REMOVE_VISIBLE:
-            return{
-                ...state, 
-                TicTacToe: state.TicTacToe.map(ttt => (ttt.id === action.payload.id ? {...ttt, visible: ttt.visible = true} : ttt))
+                TicTacToe: state.TicTacToe.map(ttt=> (ttt.id === action.payload.t.id ? {...ttt, visible: ttt.visible = true, icon: ttt.icon = action.payload.crossOrCircle} : ttt))
             }
         default:
             return{ ...state}
@@ -61,4 +52,3 @@ export const Reducer = (state = defaultState, action: TicTacToeActions): TicTacT
 }
 
 export const removeIconAction = (t: TypeTicTacToe, crossOrCircle: boolean) => ({type: TicTacToeActionsTypes.REMOVE_ICON, payload: {t, crossOrCircle}})
-export const removeVisibleAction = (payload: TypeTicTacToe) => ({type: TicTacToeActionsTypes.REMOVE_VISIBLE, payload})

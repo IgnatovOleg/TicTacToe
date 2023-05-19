@@ -2,29 +2,43 @@ import React, {useState} from 'react';
 import './App.scss';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from './store/Reducers';
-import { removeIconAction, removeVisibleAction, TypeTicTacToe } from './store/Reducers/Reducer';
+import { removeIconAction, TypeTicTacToe } from './store/Reducers/Reducer';
 import CrossAndCircleSpace from './components/CrossAndCircleSpace/CrossAndCircleSpace';
 import Top from './components/Top/Top';
+import Modal from './components/Modal/Modal';
 
 function App() {
 
   const [crossOrCircle, setCrossOrCircle] = useState<boolean>(true)
+  const [visibleModal, setVisibleModal] = useState<boolean>(true)
+  console.log(visibleModal);
+  
   const {TicTacToe} = useTypedSelector(state => state.ticTacToe)
   
   const dispatch = useDispatch()
 
 
   const visibleIcon = (t: TypeTicTacToe, crossOrCircle: boolean) => {
-    dispatch(removeVisibleAction(t))
-    dispatch(removeIconAction(t, crossOrCircle))
-    setCrossOrCircle(!crossOrCircle)
+    if(!t.visible) {
+      dispatch(removeIconAction(t, crossOrCircle))
+      setCrossOrCircle(!crossOrCircle)
+    }
+    return t
   }
 
   return (
     <div className="App">
-      <Top crossOrCircle={crossOrCircle} setCrossOrCircle={setCrossOrCircle}/>
-      <CrossAndCircleSpace crossOrCircle={crossOrCircle} setCrossOrCircle={setCrossOrCircle} TicTacToe={TicTacToe} visibleIcon={visibleIcon}/>
-
+      {visibleModal
+        ?
+          <div className='modal'>
+            <Modal visibleModal={visibleModal} setVisibleModal={setVisibleModal}/>
+          </div>
+        : 
+          <div>
+            <Top crossOrCircle={crossOrCircle} setCrossOrCircle={setCrossOrCircle}/>
+            <CrossAndCircleSpace crossOrCircle={crossOrCircle} setCrossOrCircle={setCrossOrCircle} TicTacToe={TicTacToe} visibleIcon={visibleIcon}/>
+          </div>
+      }
     </div>
   );
 }
