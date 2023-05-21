@@ -24,6 +24,9 @@ function App() {
     }
     return t
   }
+  console.log(TicTacToe);
+  
+
   
 
   return (

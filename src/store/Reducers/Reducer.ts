@@ -6,7 +6,7 @@ interface TicTacToeInterface {
 export type TypeTicTacToe = {
     id: number,
     visible: boolean,
-    icon: boolean,
+    icon: string,
 }
 
 
@@ -26,15 +26,15 @@ type TicTacToeActions = RemoveIcon
 
 const defaultState: TicTacToeInterface = {
     TicTacToe: [
-        {id: 1, visible: false, icon: false},
-        {id: 2, visible: false, icon: false},
-        {id: 3, visible: false, icon: false},
-        {id: 4, visible: false, icon: false},
-        {id: 5, visible: false, icon: false},
-        {id: 6, visible: false, icon: false},
-        {id: 7, visible: false, icon: false},
-        {id: 8, visible: false, icon: false},
-        {id: 9, visible: false, icon: false},
+        {id: 1, visible: false, icon: ""},
+        {id: 2, visible: false, icon: ""},
+        {id: 3, visible: false, icon: ""},
+        {id: 4, visible: false, icon: ""},
+        {id: 5, visible: false, icon: ""},
+        {id: 6, visible: false, icon: ""},
+        {id: 7, visible: false, icon: ""},
+        {id: 8, visible: false, icon: ""},
+        {id: 9, visible: false, icon: ""},
     ]
 }
 
@@ -43,8 +43,8 @@ export const Reducer = (state = defaultState, action: TicTacToeActions): TicTacT
     switch(action.type) {
         case TicTacToeActionsTypes.REMOVE_ICON:
             return{
-                ...state,
-                TicTacToe: state.TicTacToe.map(ttt=> (ttt.id === action.payload.t.id ? {...ttt, visible: ttt.visible = true, icon: ttt.icon = action.payload.crossOrCircle} : ttt))
+                ...state,                
+                TicTacToe: state.TicTacToe.map(ttt=> (ttt.id === action.payload.t.id ? {...ttt, visible: ttt.visible = true, icon: ttt.icon = action.payload.crossOrCircle ? ttt.icon = "x" : ttt.icon = "o"} : ttt))
             }
         default:
             return{ ...state}
