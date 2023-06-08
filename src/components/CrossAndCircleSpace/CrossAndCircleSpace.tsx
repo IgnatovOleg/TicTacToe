@@ -23,7 +23,7 @@ const CrossAndCircleSpace: React.FC <TypeProps> = ({crossOrCircle, setCrossOrCir
                 <div onClick={() => visibleIcon(t, crossOrCircle)} key={t.id}>
                     {t.visible
                     ? <div className="box">
-                        {t.icon === "x"
+                        {t.icon === "X"
                         ? <RxCross1 className='icon'/>
                         : <FaRegCircle className='icon'/>
                         }
