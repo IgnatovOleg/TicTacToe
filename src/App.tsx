@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.scss';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from './store/Reducers';
-import { removeIconAction, TypeTicTacToe } from './store/Reducers/Reducer';
+import { removeAllTTTaction, removeIconAction, TypeTicTacToe } from './store/Reducers/Reducer';
 import CrossAndCircleSpace from './components/CrossAndCircleSpace/CrossAndCircleSpace';
 import Top from './components/Top/Top';
 import Modal from './components/Modal/Modal';
@@ -12,15 +12,9 @@ function App() {
   const [crossOrCircle, setCrossOrCircle] = useState<boolean>(true)
   const [visibleModal, setVisibleModal] = useState<boolean>(true)
   const [finalyModal, setFinalyModal] = useState<boolean>(false)
-  const [resultCalculateWinner, setResultCalculateWinner] = useState<string>("")
+  const [resultCalculateWinner, setResultCalculateWinner] = useState<string>("")  
   
-  
-  
-  
-
-
   const { TicTacToe } = useTypedSelector(state => state.ticTacToe)
-
   const dispatch = useDispatch()
 
 
@@ -68,6 +62,15 @@ const removeModal = (): void => {
   setFinalyModal(false)
   setVisibleModal(true)
 }
+
+useEffect(() => {
+  function removeAllTTT(TicTacToe: TypeTicTacToe[]): TypeTicTacToe[] {
+    return TicTacToe.map(ttt => (ttt = {...ttt, visible: ttt.visible = false, icon: ttt.icon = ""}))
+  }
+  const newListIcons = removeAllTTT(TicTacToe)
+  dispatch(removeAllTTTaction(newListIcons))
+
+}, [visibleModal])
   
   
   return (

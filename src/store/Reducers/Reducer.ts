@@ -25,7 +25,7 @@ interface RemoveIcon {
 
 interface RemoveAllTTT {
     type: TicTacToeActionsTypes.REMOVE_ALL_TTT,
-    payload: TypeTicTacToe,
+    payload: TypeTicTacToe[],
 }
 
 
@@ -50,8 +50,7 @@ export const Reducer = (state = defaultState, action: TicTacToeActions): TicTacT
     switch(action.type) {
         case TicTacToeActionsTypes.REMOVE_ALL_TTT:
             return{
-                ...state, 
-                TicTacToe: state.TicTacToe.map(ttt => (ttt = {...ttt, visible: ttt.visible = false, icon: ttt.icon = ""}))
+                ...state, TicTacToe: action.payload
             }
         case TicTacToeActionsTypes.REMOVE_ICON:
             return{
@@ -64,4 +63,4 @@ export const Reducer = (state = defaultState, action: TicTacToeActions): TicTacT
 }
 
 export const removeIconAction = (t: TypeTicTacToe, crossOrCircle: boolean) => ({type: TicTacToeActionsTypes.REMOVE_ICON, payload: {t, crossOrCircle}})
-export const removeAllTTTaction = (payload: TypeTicTacToe) => ({type: TicTacToeActionsTypes.REMOVE_ALL_TTT, payload})
+export const removeAllTTTaction = (payload: TypeTicTacToe[]) => ({type: TicTacToeActionsTypes.REMOVE_ALL_TTT, payload})

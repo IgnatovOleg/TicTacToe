@@ -1,5 +1,5 @@
 import React from "react"
-import { TicTacToeInterface } from "../../store/Reducers/Reducer"
+import { TicTacToeInterface, TypeTicTacToe } from "../../store/Reducers/Reducer"
 import "./Modal.scss"
 
 interface TypeModalProps {
@@ -8,7 +8,7 @@ interface TypeModalProps {
     finalyModal: boolean,
     setFinalyModal: (finalyModal: boolean) => void,
     resultCalculateWinner: string,
-    removeModal: () => void
+    removeModal: () => void,
 }
 
 
